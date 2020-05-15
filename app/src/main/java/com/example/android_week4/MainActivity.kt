@@ -21,21 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val toolbar = findViewById(R.id.toolbar) as Toolbar?
-        setSupportActionBar(toolbar)
-
-        val actionbar = supportActionBar
-        actionbar?.title = "Movies"
-        actionbar?.elevation = 4.0F
-        actionbar?.setDisplayHomeAsUpEnabled(true)
-//        actionBar?.setLogo(R.mipmap.ic_launcher)
-//        actionBar?.setDisplayUseLogoEnabled(true)
-
-        val adapter         = MovieAdapter(this,converJsonToData(),listener)
-        val layoutmanager   = LinearLayoutManager(this)
-
-        rv.layoutManager    = layoutmanager
-        rv.adapter          = adapter
+        init()
     }
 
     private val listener = object : MovieAdapter.MovieListener{
@@ -49,6 +35,22 @@ class MainActivity : AppCompatActivity() {
             startProfileActivity(movie)
         }
 
+    }
+    private  fun init(){
+        val toolbar = findViewById(R.id.toolbar) as Toolbar?
+        setSupportActionBar(toolbar)
+
+        val actionbar = supportActionBar
+        actionbar?.title = "Movies"
+        actionbar?.elevation = 4.0F
+//        actionbar?.setDisplayHomeAsUpEnabled(true)
+
+
+        val adapter         = MovieAdapter(this,converJsonToData(),listener)
+        val layoutmanager   = LinearLayoutManager(this)
+
+        rv.layoutManager    = layoutmanager
+        rv.adapter          = adapter
     }
     private fun startProfileActivity(movie: Movie){
         val intent = Intent(this@MainActivity, ProfileActivity::class.java)
